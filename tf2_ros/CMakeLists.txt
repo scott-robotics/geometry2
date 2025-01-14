@@ -219,6 +219,15 @@ if(BUILD_TESTING)
     #   rclcpp::rclcpp
   )
 
+  find_package(ament_cmake_google_benchmark REQUIRED)
+  ament_add_google_benchmark(${PROJECT_NAME}_benchmark_transform test/benchmark_transform.cpp)
+  target_link_libraries(${PROJECT_NAME}_benchmark_transform
+    ${PROJECT_NAME}
+    # Used, but not linked to test tf2_ros's exports:
+    #   ${builtin_interfaces_TARGETS}
+    #   rclcpp::rclcpp
+  )
+
 endif()
 
 # Export old-style CMake variables
